@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hot Restaurant - Express</title>
+  <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<div class="container">
+    <div class="jumbotron">
+            <center><h1>Hot Restaurant</h1></center>
+            <center><h3>The hottest Restaurant in the area!</h3></center>
+        <hr>
+    <center>
+        <a href="/"><button type="button" class="btn-lg"><i class="fas fa-home"></i></button></a>
+        <a href="/view"><button class="btn btn-danger btn-lg"><span class="fa fa-eye"></span> View Reservations</button></a>
+        <a href="/add"><button class="btn btn-primary btn-lg"><span class="fa fa-plus"></span> Make Reservations</button></a>
+    </center>
+
+    </div>
+    <div class="row">
+
+      <div class="col-lg-12">
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"><strong>Reservations</strong></h3>
+          </div>
+          <div class="panel-body">
+            <div class="well">
+              <div id="reservations">
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+
+$.get("/api/reservations" , function(data) {
+    console.log(data)
+    for (i=0; i<data.length; i++) {
+    var people = $("<div>");
+    people.addClass("hungry")
+    people.attr("id", "hungry"+i)
+        $("#reservations").append(people)
+        $("#hungry"+ i).append("<h3>Name: " + data[i].name + "</h3>");
+        $("#hungry"+ i).append("<h3>Email: " + data[i].email + "</h3>");
+        $("#hungry"+ i).append("<h3>Party: " +data[i].party + "</h3>");
+        $("#hungry"+ i).append("<h3>ID: " +data[i].uniqueId + "</h3> <br>");
+
+    }
+});
+
+
+// function viewReservations(data) {
+//     console.log(data);
+// };
+// function appendReservations(data) {
+//     $("reservations").append(viewReservations(data))
+// }
+  </script>
+
+</body>
+</html>
